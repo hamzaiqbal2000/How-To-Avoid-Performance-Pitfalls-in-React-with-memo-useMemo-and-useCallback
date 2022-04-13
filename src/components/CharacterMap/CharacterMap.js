@@ -1,12 +1,12 @@
 import React, { memo, useMemo } from "react";
 import PropTypes from "prop-types";
 
-function itemize(text) {
+function itemize(text, transformer) {
   const letter = text
     .split("")
     .filter((l) => l !== " ")
     .reduce((collection, item) => {
-      const letter = item.toLowerCase();
+      const letter = transformer ? transformer(item) : item;
       return {
         ...collection,
         [letter]: (collection[letter] || 0) + 1,
@@ -15,8 +15,11 @@ function itemize(text) {
   return Object.entries(letter).sort((a, b) => b[1] - a[1]);
 }
 
-const CharacterMap = ({ showExplanation, text }) => {
-  const characters = useMemo(() => itemize(text), [text]);
+const CharacterMap = ({ showExplanation, text, transformer }) => {
+  const characters = useMemo(
+    () => itemize(text, transformer),
+    [text, transformer]
+  );
   return (
     <div>
       {showExplanation && (
@@ -39,4 +42,9 @@ CharacterMap.propTypes = {
   text: PropTypes.string.isRequired,
 };
 
+CharacterMap.defaultProps = {
+  transformer: null,
+};
+
 // Caching Expensive Data Calculations with useMemo
+// Managing Function Equality Checks with useCallback

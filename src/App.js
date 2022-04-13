@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState, useCallback } from "react";
 import "./App.css";
 
 import CharacterMap from "./components/CharacterMap/CharacterMap";
@@ -9,6 +9,8 @@ function App() {
     (state) => !state,
     false
   );
+  const transformer = useCallback((item) => item.toLowerCase(), []);
+
   return (
     <div className="wrapper">
       <label htmlFor="text">
@@ -25,7 +27,11 @@ function App() {
         <button onClick={toggleExplanation}>Show Explanation</button>
       </div>
 
-      <CharacterMap showExplanation={showExplanation} text={text} />
+      <CharacterMap
+        showExplanation={showExplanation}
+        text={text}
+        transformer={transformer}
+      />
     </div>
   );
 }
