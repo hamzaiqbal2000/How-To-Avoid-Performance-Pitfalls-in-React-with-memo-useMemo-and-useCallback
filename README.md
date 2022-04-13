@@ -1,4 +1,11 @@
-# Getting Started with Create React App
+## How To Avoid Performance Pitfalls in React with memo, useMemo, and useCallback
+
+You now have the tools to improve performance on expensive components. You can use memo, useMemo, and useCallback to avoid costly component re-renders. But all these strategies include a performance cost of their own. memo will take extra work to compare properties, and the Hooks will need to run extra comparisons on each render. Only use these tools when there is a clear need in your project, otherwise you risk adding in your own latency.
+
+Finally, not all performance problems require a technical fix. There are times when the performance cost is unavoidable—such as slow APIs or large data conversions—and in those situations you can solve the problem using design by either rendering loading components, showing placeholders while asynchronous functions are running, or other enhancements to the user experience.
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
